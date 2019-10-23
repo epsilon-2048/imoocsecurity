@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>imooc.security</artifactId>
+        <groupId>com.imooc.security</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>imooc.security-demo</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.imooc.security</groupId>
+            <artifactId>imooc.security-browser</artifactId>
+            <version>${imooc.security.version}</version>
+        </dependency>
+    </dependencies>
+
+    <!--Spring Boot Maven plugin的最主要goal就是repackage，
+    其在Maven的package生命周期阶段，能够将mvn package生成的软件包，
+    再次打包为可执行的软件包，并将mvn package生成的软件包重命名为*.original。-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.3.3.RELEASE</version>
+                <!--<configuration>
+                    &lt;!&ndash; 指定该Main Class为全局的唯一入口 &ndash;&gt;
+                    <mainClass>com.imooc.DemoApplication</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>-->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>demo</finalName>
+    </build>
+
+</project>

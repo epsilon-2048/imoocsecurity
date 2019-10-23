@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/imooc_demo?characterEncoding=utf8&serverTimezone=GMT%2b8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: chen
+    driver-class-name: com.mysql.jdbc.Driver
+# basic验证暂时关掉
+security:
+  basic:
+    enabled: false

@@ -5,6 +5,12 @@ spring:
     password: chen
     driver-class-name: com.mysql.jdbc.Driver
 # basic验证暂时关掉
-security:
-  basic:
-    enabled: false
+#security:
+#  basic:
+#   enabled: false
+
+# 自定义登录页
+imooc:
+  security:
+    browser:
+      loginPage: /demo-signIn.html

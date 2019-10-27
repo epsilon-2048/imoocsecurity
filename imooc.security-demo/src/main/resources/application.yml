@@ -19,6 +19,10 @@ imooc:
     code:
       image:
         # 图形验证码数字个数
-        length: 5
-        width: 100
-        url: /user,/user/*
+        length: 4
+        # 宽度 如果在页面请求地址中带有width参数，则将覆盖此配置
+        width: 50
+        # 高度 如果在页面请求地址中带有height参数，则将覆盖此配置
+        height: 25
+        # 要验证码验证的url地址，","分隔，
+        # url: /user,/user/*

@@ -1,5 +1,7 @@
 package com.imooc.security.browser;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -8,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+
 
 /**
  * 处理用户信息获取逻辑
@@ -19,19 +23,23 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Autowired private PasswordEncoder passwordEncoder;
 
+    Logger logger = LoggerFactory.getLogger(getClass());
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        logger.info("登陆的用户名：" + username);
         //根据用户名查找用户信息（任何你需要的手段,数据库、xml等）
         //。。。
         //返回一个实现了UserDetails接口的类即可，User是spring默认实现的类，可以自定义一个你需要的类
-        System.out.println(username);
+
 
         //这个加密方法的调用应该是在注册时将密码加密后放进数据库或XML的，而非在这里调用
         String dbPwd = passwordEncoder.encode("123456");
         //这个密码应该是从数据库或xml中取出的密码，而且是加密过的，而非写死。
         //这里是简单模拟从数据库获取到加密的密码
         String password = dbPwd;
-        System.out.println(password);
+        logger.info("从数据库或xml中获取的加密密码：" + password);
         //权限列表也是由数据库或xml中获取，多个权限由,分隔
         String authorities = "admin,superAdmin";
 

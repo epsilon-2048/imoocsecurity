@@ -38,13 +38,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     private SecurityProperties securityProperties;
 
+    //主要用来做类URLs字符串匹配的工具类；
     private AntPathMatcher pathMatcher = new AntPathMatcher();
 
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
         String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(),",");
-        urls.addAll(Arrays.asList(configUrls));
+        if (configUrls != null && configUrls.length != 0)
+            urls.addAll(Arrays.asList(configUrls));
         urls.add("/authentication/form");
         //urls.forEach(System.out::println);
     }

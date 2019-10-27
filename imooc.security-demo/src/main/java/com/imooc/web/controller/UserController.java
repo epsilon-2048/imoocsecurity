@@ -13,7 +13,9 @@ import com.imooc.dto.UserQueryCondition;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -89,4 +91,10 @@ public class UserController {
 		return user;
 	}
 
+	@GetMapping("/me")
+	public Object getCurrentUser(@AuthenticationPrincipal UserDetails user){
+	//public Object getCurrentUser(Authentication authentication){
+	//	return authentication;
+		return user;
+	}
 }

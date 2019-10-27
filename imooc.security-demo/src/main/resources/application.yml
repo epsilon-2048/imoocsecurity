@@ -15,4 +15,4 @@ imooc:
       # 自定义登录页
       loginPage: /demo-signIn.html
       # 自定义跳转方式
-      loginType: REDIRECT
+      loginType: JSON

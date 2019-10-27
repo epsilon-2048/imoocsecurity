@@ -8,12 +8,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired private SecurityProperties securityProperties;
+
+    //配置自定义认证成功处理器，其实现类已经注册为带名字的组件，注入组件名即可
+    @Autowired
+    AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
+
+    //配置自定义认证失败处理器，其实现类已经注册为带名字的组件，注入组件名即可
+    @Autowired
+    AuthenticationFailureHandler imoocAuthenticationFailureHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -25,6 +35,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/authentication/require")
                 //自定义登陆信息表单提交地址
                 .loginProcessingUrl("/authentication/form")
+                //配置自定义认证成功处理器
+                .successHandler(imoocAuthenticationSuccessHandler)
+                //配置自定义认证失败处理器
+                .failureHandler(imoocAuthenticationFailureHandler)
                 .and()
                 //http.authorizeRequests()方法有多个子节点，每个macher按照他们的声明顺序执行
                 .authorizeRequests()

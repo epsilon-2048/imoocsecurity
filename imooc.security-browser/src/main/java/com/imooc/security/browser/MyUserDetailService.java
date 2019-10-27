@@ -32,6 +32,8 @@ public class MyUserDetailService implements UserDetailsService {
         //这里是简单模拟从数据库获取到加密的密码
         String password = dbPwd;
         System.out.println(password);
+        //权限列表也是由数据库或xml中获取，多个权限由,分隔
+        String authorities = "admin,superAdmin";
 
         /**
          * 实现你的校验逻辑
@@ -48,6 +50,6 @@ public class MyUserDetailService implements UserDetailsService {
          */
         return new User(username, password,
                 true, true,true,true,
-                AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+                AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
     }
 }

@@ -23,6 +23,7 @@ public class FileController {
         System.out.println(file.getName());
         System.out.println(file.getOriginalFilename());
         System.out.println(file.getSize());
+
         //实际应用不会存到项目中，
         File localFile = new File(folder, new Date().getTime() + ".txt");
         file.transferTo(localFile);

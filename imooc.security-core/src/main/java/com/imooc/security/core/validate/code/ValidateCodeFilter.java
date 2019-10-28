@@ -1,9 +1,9 @@
 package com.imooc.security.core.validate.code;
 
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.image.ImageCode;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
@@ -44,6 +44,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
+        //需要进行图形验证码的url集合
         String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(),",");
         if (configUrls != null && configUrls.length != 0)
             urls.addAll(Arrays.asList(configUrls));
@@ -80,7 +81,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
         //获取系统为该请求生成的验证码封装类
         ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(request,
-                ValidateCodeController.SESSION_KEY);
+                ValidateCodeProcessor.SESSION_KEY_PREFIX +"IMAGE");
 
         //获取请求中的验证码
         String codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(),"imageCode");
@@ -95,7 +96,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
         if (codeInSession.isExpired()) {
             //移除系统为该请求生成的验证码封装类
-            sessionStrategy.removeAttribute(request,ValidateCodeController.SESSION_KEY);
+            sessionStrategy.removeAttribute(request,ValidateCodeProcessor.SESSION_KEY_PREFIX +"IMAGE");
             throw new ValidateCodeException("验证码已过期");
         }
 
@@ -104,7 +105,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
         }
 
         //移除系统为该请求生成的验证码封装类
-        sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY);
+        sessionStrategy.removeAttribute(request, ValidateCodeProcessor.SESSION_KEY_PREFIX +"IMAGE");
     }
 
     public AuthenticationFailureHandler getAuthenticationFailureHandler() {

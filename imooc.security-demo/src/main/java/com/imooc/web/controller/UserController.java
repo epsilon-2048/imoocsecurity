@@ -12,6 +12,8 @@ import javax.validation.Valid;
 import com.imooc.dto.UserQueryCondition;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -38,13 +40,10 @@ import com.imooc.dto.User;
 @RequestMapping("/user")
 public class UserController {
 
+	Logger logger = LoggerFactory.getLogger(getClass());
+
 	@PostMapping
 	public User create(@Valid @RequestBody User user) {
-
-		System.out.println(user.getId());
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
-		System.out.println(user.getBirthday());
 
 		user.setId("1");
 		return user;
@@ -52,11 +51,6 @@ public class UserController {
 
 	@PutMapping("/{id:\\d+}")
 	public User update(@Valid @RequestBody User user, BindingResult errors) {
-
-		System.out.println(user.getId());
-		System.out.println(user.getUsername());
-		System.out.println(user.getPassword());
-		System.out.println(user.getBirthday());
 
 		user.setId("1");
 		return user;
@@ -71,8 +65,7 @@ public class UserController {
 	@JsonView(User.UserSimpleView.class)
 	public List<User> query(UserQueryCondition condition) {
 
-		System.out.println(ReflectionToStringBuilder.toString(condition, ToStringStyle.MULTI_LINE_STYLE));
-
+		logger.info(ReflectionToStringBuilder.toString(condition, ToStringStyle.MULTI_LINE_STYLE));
 
 		List<User> users = new ArrayList<>();
 		users.add(new User());
@@ -85,7 +78,7 @@ public class UserController {
 	@JsonView(User.UserDetailView.class)
 	public User getInfo(@PathVariable String id) {
 //		throw new RuntimeException("user not exist");
-		System.out.println("进入getInfo服务");
+		logger.info("进入getInfo服务");
 		User user = new User();
 		user.setUsername("tom");
 		return user;

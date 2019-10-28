@@ -60,7 +60,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         Set<String> urls = new HashSet<>();
         Collections.addAll(urls,"/authentication/require",
                 securityProperties.getBrowser().getLoginPage(),
-                "/code/image");
+                "/code/image","/code/sms");
         //urls.add(null);
         String[] urlStrings = StringUtils.splitByWholeSeparatorPreserveAllTokens(
                 securityProperties.getPermitUrls(),",");

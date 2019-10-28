@@ -17,14 +17,23 @@ imooc:
       # 自定义跳转方式
       loginType: JSON
     code:
+      #图形验证码配置
       image:
         # 图形验证码数字个数
         length: 6
-        # 宽度 如果在页面请求地址中带有width参数，则将覆盖此配置
+        #过期时间
+        expireIn: 65
+        # 宽度 此配置覆盖了默认配置，如果在页面请求地址中带有width参数，则将覆盖此配置
         width: 50
-        # 高度 如果在页面请求地址中带有height参数，则将覆盖此配置
+        # 高度 此配置覆盖了默认配置，如果在页面请求地址中带有height参数，则将覆盖此配置
         height: 25
         # 要验证码验证的url地址，","分隔，","之间不要有空格
-        # url: /user,/user/*
+        #url: /user,/user/*
+      #短信验证码配置
+      sms:
+        #验证码长度
+        length: 8
+        #过期时间
+        expireIn: 10
     #不需做登陆验证的url，","分隔，","之间不要有空格
     #permitUrls: /user/me,/user/*

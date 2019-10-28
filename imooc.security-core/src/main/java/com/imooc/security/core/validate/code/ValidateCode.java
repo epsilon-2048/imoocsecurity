@@ -1,13 +1,9 @@
 package com.imooc.security.core.validate.code;
 
-import java.awt.image.BufferedImage;
 import java.time.LocalDateTime;
 
-//图形验证码封装类
-public class ImageCode {
-
-    //图片
-    private BufferedImage image;
+//验证码封装类
+public class ValidateCode {
 
     //验证码
     private String code;
@@ -16,19 +12,12 @@ public class ImageCode {
     private LocalDateTime expireTime;
 
 
-    public ImageCode(BufferedImage image, String code, int expireIn) {
-        this.image = image;
+    public ValidateCode( String code, int expireIn) {
+
         this.code = code;
         this.expireTime = LocalDateTime.now().plusSeconds(expireIn);
     }
 
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
-    }
 
     public String getCode() {
         return code;

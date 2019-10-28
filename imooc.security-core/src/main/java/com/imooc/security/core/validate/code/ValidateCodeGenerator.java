@@ -7,6 +7,6 @@ import org.springframework.web.context.request.ServletWebRequest;
  */
 public interface ValidateCodeGenerator {
 
-    ImageCode generator(ServletWebRequest request);
+    ValidateCode generate(ServletWebRequest request);
 }
 

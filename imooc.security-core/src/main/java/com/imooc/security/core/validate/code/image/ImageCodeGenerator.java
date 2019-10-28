@@ -1,6 +1,7 @@
-package com.imooc.security.core.validate.code;
+package com.imooc.security.core.validate.code.image;
 
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.ValidateCodeGenerator;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
@@ -8,14 +9,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ThreadLocalRandom;
 
-//这里并没有将其声明为组件，是为了可以让用户提供自己的生成器
 
+/**
+ * 这里并没有将其声明为组件，是为了可以让用户提供自己的生成器
+ * 用户提供的图形验证码生成器必须注册为名为imageCodeGenerator的组件
+ */
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 
     private SecurityProperties securityProperties;
 
     @Override
-    public ImageCode generator(ServletWebRequest request) {
+    public ImageCode generate(ServletWebRequest request) {
         //从请求中获取一个名为width的int型参数，如果取不到，则用配置的值
         int width = ServletRequestUtils.getIntParameter(request.getRequest(),"width",securityProperties.getCode().getImage().getWidth());
         int height = ServletRequestUtils.getIntParameter(request.getRequest(),"height",securityProperties.getCode().getImage().getHeight());

@@ -21,6 +21,18 @@ public class SecurityProperties {
      */
     private ValidateCodeProperties code = new ValidateCodeProperties();
 
+    /**
+     * 不需通过验证的url
+     */
+    private String permitUrls;
+
+    public String getPermitUrls() {
+        return permitUrls;
+    }
+
+    public void setPermitUrls(String permitUrls) {
+        this.permitUrls = permitUrls;
+    }
 
     public ValidateCodeProperties getCode() {
         return code;

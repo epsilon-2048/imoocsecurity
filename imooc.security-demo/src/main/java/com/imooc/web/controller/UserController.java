@@ -95,6 +95,7 @@ public class UserController {
 	public Object getCurrentUser(@AuthenticationPrincipal UserDetails user){
 	//public Object getCurrentUser(Authentication authentication){
 	//	return authentication;
+		//System.out.println(user);
 		return user;
 	}
 }

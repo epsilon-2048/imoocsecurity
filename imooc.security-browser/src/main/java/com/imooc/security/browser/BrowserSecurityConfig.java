@@ -2,6 +2,7 @@ package com.imooc.security.browser;
 
 import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.security.core.validate.code.ValidateCodeFilter;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,10 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -51,6 +56,18 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         //初始化需认证的url
         filter.afterPropertiesSet();
 
+        //--------------不需做登陆验证的url----------------------------
+        Set<String> urls = new HashSet<>();
+        Collections.addAll(urls,"/authentication/require",
+                securityProperties.getBrowser().getLoginPage(),
+                "/code/image");
+        //urls.add(null);
+        String[] urlStrings = StringUtils.splitByWholeSeparatorPreserveAllTokens(
+                securityProperties.getPermitUrls(),",");
+        if (urlStrings != null && urlStrings.length != 0)
+            urls.addAll(Arrays.asList(urlStrings));
+        //System.out.println(Arrays.toString(urls.toArray(new String[0])));
+        //***--------------------------------------------
 
         //http.httpBasic()
         http
@@ -78,9 +95,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             //http.authorizeRequests()方法有多个子节点，每个macher按照他们的声明顺序执行
             .authorizeRequests()
                 //放行匹配的url
-                .antMatchers("/authentication/require",
-                    securityProperties.getBrowser().getLoginPage(),
-                    "/code/image")
+                .antMatchers(urls.toArray(new String[0]))
                 .permitAll()
                 //尚未匹配的任何URL都要求用户进行身份验证
                 .anyRequest()

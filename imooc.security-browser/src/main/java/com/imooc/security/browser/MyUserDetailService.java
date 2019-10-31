@@ -11,12 +11,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-
-
 /**
  * 处理用户信息获取逻辑
  * 根据用户名获取用户信息，如果没有，抛出用户不存在异常
- * 这里不负责密码的校验，密码的校验由spring来校验，你只要提供正确的密码
+ * 这里不负责认证，认证由AuthenticationProvider来做，你只要提供正确的密码
+ *
+ * 客户需要写一个实现UserDetailsService的类和一个实现UserDetails的类
+ * 如MyUserDetailService和User
  */
 @Component
 public class MyUserDetailService implements UserDetailsService {
@@ -44,7 +45,7 @@ public class MyUserDetailService implements UserDetailsService {
         String authorities = "admin,superAdmin";
 
         /**
-         * 实现你的校验逻辑
+         * 为这个user设置他的状态
          * boolean isAccountNonExpired();
          * 账户是否过期
          * boolean isAccountNonLocked();

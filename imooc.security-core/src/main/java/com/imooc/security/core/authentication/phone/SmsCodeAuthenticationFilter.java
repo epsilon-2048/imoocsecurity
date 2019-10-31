@@ -1,7 +1,7 @@
 package com.imooc.security.core.authentication.phone;
 
+import com.imooc.security.core.properties.SecurityConstants;
 import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -11,16 +11,22 @@ import org.springframework.util.Assert;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 短信验证过滤器
+ */
+
 public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
-    public static final String IMOOC_FORM_PHONE_KEY = "phone";
-    //请求参数
-    private String phoneParameter = IMOOC_FORM_PHONE_KEY;
+
+    /**
+     * 请求参数名
+     */
+    private String phoneParameter = SecurityConstants.DEFAULT_PARAMETER_NAME_PHONE;
     //是否只处理post请求
     private boolean postOnly = true;
 
     public SmsCodeAuthenticationFilter() {
         //处理/authentication/phone的post请求
-        super(new AntPathRequestMatcher("/authentication/phone", "POST"));
+        super(new AntPathRequestMatcher(SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_PHONE, "POST"));
     }
 
     //认证流程

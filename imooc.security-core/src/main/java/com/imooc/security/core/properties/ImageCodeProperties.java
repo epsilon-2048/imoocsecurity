@@ -5,9 +5,15 @@ package com.imooc.security.core.properties;
  */
 public class ImageCodeProperties extends SmsCodeProperties {
 
-    //宽度像素
+
+    /**
+     * 宽度像素
+     */
     private int width = 67;
-    //高度像素
+
+    /**
+     * 高度像素
+     */
     private int height = 23;
 
     public ImageCodeProperties() {

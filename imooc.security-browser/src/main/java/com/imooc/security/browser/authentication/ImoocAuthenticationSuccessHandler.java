@@ -1,14 +1,12 @@
 package com.imooc.security.browser.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.imooc.security.core.properties.BrowserProperties;
-import com.imooc.security.core.properties.LoginType;
+import com.imooc.security.core.properties.LoginResponseType;
 import com.imooc.security.core.properties.SecurityProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -38,11 +36,11 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
         //Authentication接口中封装了认证信息，
         //System.out.println(authentication);
         logger.info("登陆成功");
-        if (LoginType.JSON.equals(securityProperties.getBrowser().getLoginType())) {
+        if (LoginResponseType.JSON.equals(securityProperties.getBrowser().getLoginResponseType())) {
             httpServletResponse.setContentType("application/json;charset=UTF-8");
             httpServletResponse.getWriter().print(objectMapper.writeValueAsString(authentication));
         } else {
-        //调用默认方法
+    //调用默认方法
             super.onAuthenticationSuccess(httpServletRequest, httpServletResponse, authentication);
         }
     }

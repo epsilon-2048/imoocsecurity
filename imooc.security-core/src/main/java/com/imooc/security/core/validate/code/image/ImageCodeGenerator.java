@@ -12,10 +12,13 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 这里并没有将其声明为组件，是为了可以让用户提供自己的生成器
- * 用户提供的图形验证码生成器必须注册为名为imageCodeGenerator的组件
+ * 用户提供的图形验证码生成器必须注册为名为imageValidateCodeGenerator的组件
  */
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 
+    /**
+     * 系统配置
+     */
     private SecurityProperties securityProperties;
 
     @Override

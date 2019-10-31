@@ -1,6 +1,7 @@
 package com.imooc.security.browser;
 
 import com.imooc.security.browser.support.SimpleResponse;
+import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -51,7 +52,7 @@ public class BrowserSecurityController {
      * @param response
      * @return
      */
-    @RequestMapping("/authentication/require")
+    @RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public SimpleResponse RequireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

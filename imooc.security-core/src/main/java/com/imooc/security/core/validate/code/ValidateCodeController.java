@@ -1,6 +1,9 @@
 package com.imooc.security.core.validate.code;
 
+import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.validate.code.sms.SmsCodeSender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
@@ -19,8 +22,10 @@ import java.util.Map;
 @RestController
 public class ValidateCodeController {
 
+    Logger logger = LoggerFactory.getLogger(getClass());
+
     @Autowired
-    private Map<String, ValidateCodeProcessor> validateCodeProcessors;
+    private ValidateCodeProcessorHolder validateCodeProcessorHolder;
 
     /**
      * 创建验证码，根据验证码类型不同，调用不同的 {@link ValidateCodeProcessor}接口实现
@@ -29,13 +34,11 @@ public class ValidateCodeController {
      * @param type
      * @throws Exception
      */
-    @GetMapping("/code/{type}")
+    @GetMapping(SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/{type}")
     public void createCode(HttpServletRequest request, HttpServletResponse response, @PathVariable String type) throws Exception {
 
-        if (validateCodeProcessors.get(type+"CodeProcessor") != null)
-            validateCodeProcessors.get(type+"CodeProcessor").create(new ServletWebRequest(request, response));
-        else
-            System.out.println("没有提供这种服务的处理器");
+        validateCodeProcessorHolder.findValidateCodeProcessor(type).create(new ServletWebRequest(request, response));
+
     }
 
     /*  //重构抽象出模板方法

@@ -39,6 +39,10 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     //AuthenticationManager根据这个方法挑选一个provider来处理token
     @Override
     public boolean supports(Class<?> authentication) {
-        return SmsCodeAuthenticationProvider.class.isAssignableFrom(authentication);
+        //System.out.println(SmsCodeAuthenticationProvider.class);
+        //System.out.println(authentication);
+        //System.out.println(SmsCodeAuthenticationProvider.class.isAssignableFrom(authentication));
+        //没发现写成了provider。。。找半天错误
+        return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

@@ -4,8 +4,8 @@ import com.imooc.security.core.validate.code.image.ImageCode;
 import com.imooc.security.core.validate.code.ValidateCodeGenerator;
 import org.springframework.web.context.request.ServletWebRequest;
 
-//@Component("imageCodeGenerator")
-//组件必须命名为imageCodeGenerator
+//@Component("imageValidateCodeGenerator")
+//组件必须命名为imageValidateCodeGenerator
 //自定义图形验证码实现类，实现ValidateCodeGenerator接口并注册为组件
 public class DemoImageCodeGenerator implements ValidateCodeGenerator {
 

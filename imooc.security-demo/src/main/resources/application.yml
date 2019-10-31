@@ -14,8 +14,10 @@ imooc:
     browser:
       # 自定义登录页
       loginPage: /demo-signIn.html
-      # 自定义跳转方式
-      loginType: JSON
+      # 自定义返回方式 JSON | REDIRECT
+      loginResponseType: JSON
+      # 记住我过期时间
+      rememberMeSeconds: 60
     code:
       #图形验证码配置
       image:
@@ -27,13 +29,15 @@ imooc:
         width: 50
         # 高度 此配置覆盖了默认配置，如果在页面请求地址中带有height参数，则将覆盖此配置
         height: 25
-        # 要验证码验证的url地址，","分隔，","之间不要有空格
-        #url: /user,/user/*
+        # 要验证码验证的url:请求方式，":"分隔请求方式, ","分隔多个需验证地址，","之间不要有空格
+        #url: /user:get,/user/*:*
       #短信验证码配置
       sms:
         #验证码长度
         length: 8
         #过期时间
-        expireIn: 10
+        expireIn: 30
+        # 要验证码验证的url:请求方式，":"分隔请求方式, ","分隔多个需验证地址，","之间不要有空格
+        #url: /user:post,/user/*:get
     #不需做登陆验证的url，","分隔，","之间不要有空格
-    #permitUrls: /user/me,/user/*
+    permitUrls: /user/me,/user/*

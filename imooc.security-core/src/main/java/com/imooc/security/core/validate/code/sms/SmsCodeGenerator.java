@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 手机验证码生成器,注册为组件并且必须命名为smsCodeGenerator
  */
-@Component("smsCodeGenerator")
+@Component("smsValidateCodeGenerator")
 public class SmsCodeGenerator implements ValidateCodeGenerator {
 
     @Autowired

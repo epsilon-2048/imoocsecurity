@@ -4,10 +4,15 @@ import com.imooc.security.core.validate.code.ValidateCode;
 
 import java.awt.image.BufferedImage;
 
-//图形验证码封装类
+
+/**
+ * 图形验证码封装类
+ */
 public class ImageCode extends ValidateCode {
 
-    //图片
+    /**
+     * 图片
+     */
     private BufferedImage image;
 
 

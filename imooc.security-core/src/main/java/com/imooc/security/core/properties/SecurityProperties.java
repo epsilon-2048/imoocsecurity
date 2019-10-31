@@ -22,7 +22,7 @@ public class SecurityProperties {
     private ValidateCodeProperties code = new ValidateCodeProperties();
 
     /**
-     * 不需通过验证的url
+     * 不需通过验证的url,即未登录也能访问的url
      */
     private String permitUrls;
 

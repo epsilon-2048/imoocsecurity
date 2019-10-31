@@ -7,10 +7,14 @@ package com.imooc.security.core.properties;
 
 public class ValidateCodeProperties {
 
-    //图形验证码
+    /**
+     * 图形验证码配置
+     */
     private ImageCodeProperties image = new ImageCodeProperties();
 
-    //短信验证码
+    /**
+     * 短信验证码配置
+     */
     private SmsCodeProperties sms = new SmsCodeProperties();
 
     public ImageCodeProperties getImage() {

@@ -9,12 +9,12 @@ public class BrowserProperties {
     /**
      * 配置登陆页，提供默认值
      */
-    private String loginPage = "/imooc-signIn.html";
+    private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
 
     /**
      * 登陆后返回格式
      */
-    private LoginType loginType = LoginType.JSON;
+    private LoginResponseType loginResponseType = LoginResponseType.JSON;
 
     /**
      * rememberMe过期时间，秒为单位
@@ -37,11 +37,11 @@ public class BrowserProperties {
         this.loginPage = loginPage;
     }
 
-    public LoginType getLoginType() {
-        return loginType;
+    public LoginResponseType getLoginResponseType() {
+        return loginResponseType;
     }
 
-    public void setLoginType(LoginType loginType) {
-        this.loginType = loginType;
+    public void setLoginResponseType(LoginResponseType loginResponseType) {
+        this.loginResponseType = loginResponseType;
     }
 }

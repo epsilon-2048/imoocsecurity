@@ -19,7 +19,7 @@ public class ValidateCodeBeanConfig {
 
     /**
      * 当客户没有提供一个图形验证码生成器时，提供一个默认的图形验证码生成器
-     * 当客户提供了一个名为imageCodeGenerator的组件后，将不注册默认图形验证码生成器
+     * 当客户提供了一个名为imageValidateCodeGenerator的组件后，将不注册默认图形验证码生成器
      */
 
     //@ConditionalOnMissingBean
@@ -33,9 +33,10 @@ public class ValidateCodeBeanConfig {
     //@ConditionalOnMissingBean(value = ValidateCodeGenerator.class)
     //这里还是使用name属性吧，因为有多个实现了ValidateCodeGenerator的实现类，且功能不同
     //这里只要求当有自定义图形验证码生成器没有实现时，提供一个默认实现类，用value满足不了需求
+    //这个方法名为组件名
     @Bean
-    @ConditionalOnMissingBean(name = "imageCodeGenerator")
-    public ValidateCodeGenerator imageCodeGenerator() {
+    @ConditionalOnMissingBean(name = "imageValidateCodeGenerator")
+    public ValidateCodeGenerator imageValidateCodeGenerator() {
         ImageCodeGenerator codeGenerator = new ImageCodeGenerator();
         codeGenerator.setSecurityProperties(securityProperties);
         return  codeGenerator;
@@ -50,6 +51,5 @@ public class ValidateCodeBeanConfig {
     public SmsCodeSender smsCodeSender() {
         return new DefaultSmsCodeSender();
     }
-
 
 }

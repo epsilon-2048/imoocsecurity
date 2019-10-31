@@ -1,17 +1,23 @@
 package com.imooc.security.core.properties;
 
 /**
- * 图形验证码基本配置封装类
+ * 短信验证码基本配置封装类
  */
 public class SmsCodeProperties {
 
-    //验证码个数
+    /**
+    * 验证码个数
+    */
     private int length = 6;
 
-    //过期时间
+    /**
+     * 过期时间
+     */
     private int expireIn = 60;
 
-    //指定哪些url需要验证 以逗号分隔
+    /**
+     * 指定哪些url需要图形验证码验证 以逗号分隔
+     */
     private String url;
 
     public int getLength() {
